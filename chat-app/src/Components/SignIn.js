@@ -44,62 +44,49 @@ const styles = theme => ({
   },
 });
 
-class Register extends React.Component{
+class SignIn extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      username:'',
-      firstname: '',
-      lastname: '',
-      email: '',
-      password: '',
+      signInEmail: '',
+      signInUsername: '',
+      signInPassword: '',
     }
   }
 
   onEmailChange = (event) => {
-    this.setState({email: event.target.value});
+    this.setState({signInEmail: event.target.value})
   }
 
-  onUserNameChange = (event) => {
-      this.setState({username: event.target.value});
-  }
-
-  onFirstNameChange = (event) => {
-    this.setState({firstname: event.target.value});
-  }
-
-  onLastNameChange = (event) => {
-    this.setState({lastname: event.target.value});
+  onUsernameChange = (event) => {
+    this.setState({signInUsername: event.target.value})
   }
 
   onPasswordChange = (event) => {
-    this.setState({password: event.target.value});
+    this.setState({signInPassword: event.target.value})
   }
 
-  onRegister = () => {
-    fetch('http://localhost:3000/register', {
+  onSubmitSignIn = () => {
+    fetch('http://localhost:3000/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        username:this.state.username,
-        firstname:this.state.firstname,
-        lastname:this.state.lastname,
-        email:this.state.email,
-        password: this.state.password
+        email: this.state.signInEmail,
+        username: this.state.signInUsername,
+        password: this.state.signInPassword
       })
     })
     .then(response => response.json())
-    .then(user => {
-      if(user) {
-        this.props.loadUser(user);
+    .then(data => {
+      if (data){
         this.props.onRouteChange('home');
+        this.props.checkUser(data.username);
       }
     })
   }
 
-
-  render() {
-    const {classes} = this.props;
+  render(){
+    const { classes } = this.props;
     return (
     <React.Fragment>
       <CssBaseline />
@@ -108,8 +95,8 @@ class Register extends React.Component{
           <Avatar className={classes.avatar}>
             <LockIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign Up
+          <Typography component="h2" variant="display1">
+            Sign in
           </Typography>
           <form className={classes.form}>
             <FormControl margin="normal" required fullWidth>
@@ -119,34 +106,16 @@ class Register extends React.Component{
               id="email"
               name="email"
               autoComplete="email"
-              autoFocus />
+             autoFocus />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="username">UserName</InputLabel>
+              <InputLabel htmlFor="username">Username</InputLabel>
               <Input
-                onChange={this.onUserNameChange}
-                name="Username"
-                type="Username"
-                id="Username"
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="firstname">First Name</InputLabel>
-              <Input
-                onChange={this.onFirstNameChange}
-                name="firstname"
-                type="firstname"
-                id="firstname"
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="lastname">Last Name</InputLabel>
-              <Input
-                onChange={this.onLastNameChange}
-                name="lastname"
-                type="lastname"
-                id="lastname"
-              />
+              onChange={this.onUsernameChange}
+              id="username"
+              name="username"
+              autoComplete="username"
+             autoFocus />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
@@ -158,7 +127,6 @@ class Register extends React.Component{
                 autoComplete="current-password"
               />
             </FormControl>
-
             {/*<FormControlLabel
                           control={<Checkbox value="remember" color="primary" />}
                           label="Remember me"
@@ -168,9 +136,9 @@ class Register extends React.Component{
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={this.onRegister}
+              onClick={this.onSubmitSignIn}
             >
-              Sign Up
+              Sign in
             </Button>
           </form>
         </Paper>
@@ -180,4 +148,4 @@ class Register extends React.Component{
   }
 }
 
-export default withStyles(styles)(Register);
+export default withStyles(styles)(SignIn);

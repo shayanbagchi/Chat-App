@@ -48,6 +48,7 @@ class Register extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      id:'',
       username:'',
       firstname: '',
       lastname: '',
@@ -108,7 +109,7 @@ class Register extends React.Component{
           <Avatar className={classes.avatar}>
             <LockIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h2" variant="display1">
             Sign Up
           </Typography>
           <form className={classes.form}>
