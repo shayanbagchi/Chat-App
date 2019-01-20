@@ -66,8 +66,9 @@ app.post('/register', (req,res) => {
 	const hash = bcrypt.hashSync(password, saltRounds);
 	db.transaction(trx => {
 		trx.insert({
-			hash: hash,
-			email:email
+			email: email,
+			username: username,
+			hash: hash
 		})
 		.into('login')
 		.returning('email')
@@ -75,17 +76,17 @@ app.post('/register', (req,res) => {
 			return trx('users')
 				.returning('*')
 				.insert({
+					email:loginEmail[0],
+					username:username,
 					firstname:firstname,
 					lastname:lastname,
-					username:username,
-					email:loginEmail[0],
 					joined: new Date()
 				})
 			.then(user => {
 				res.json(user[0]);
 				chatkit.createUser({
 					  id: user[0].username,
-					  name: user[0].firstname + user[0].lastname
+					  name: user[0].firstname + " " + user[0].lastname
 					})
 					  .catch(error => {
 					      if (error.error_type === 'services/chatkit/user_already_exists') {

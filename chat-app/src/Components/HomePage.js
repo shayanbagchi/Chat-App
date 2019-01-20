@@ -17,18 +17,38 @@ class HomePage extends Component {
 			roomId: null,
 			messages: [],
 			joinableRooms: [],
-			joinedRooms: []
+			joinedRooms: [],
+			username: ''
 		}
 	}
 
-	componentWillReceiveProps (data) {
-	  if (data !== this.props.Username) {
-	    this.fetchdata(data.Username);
-	  }
+	// componentWillReceiveProps (data) {
+	//   if (data !== this.props.Username) {
+	//     this.fetchdata(data.Username);
+	//     console.log(data.Username);
+	//   }
+	// }
+
+	static getDerivedStateFromProps(nextProps, prevState){
+	   if(nextProps.Username !== prevState.Username){
+	    return { username: nextProps.Username};
+	   }
+	  else return null;
 	}
 
 	componentDidMount(){
-		this.fetchdata("test");
+		if (this.state.username){
+			this.fetchdata(this.state.username);
+		} else{
+			this.fetchdata("test");
+		}
+	}
+
+	componentDidUpdate(prevProps, prevState){
+		if(prevProps.Username !== this.props.Username){
+		    this.setState({username: prevProps.Username});
+		    this.fetchdata(this.state.username);
+		  }
 	}
 
 	fetchdata(props) {

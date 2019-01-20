@@ -25,12 +25,12 @@ class App extends Component {
 
 	loadUser = (user) => {
 		this.setState({
-			username: 'user.username',
-			firstname: 'user.firstname',
-			lastname: 'user.lastname',
-			email: 'user.email',
-			password: 'user.password',
-			joined: 'user.joined'
+			username: user.username,
+			firstname: user.firstname,
+			lastname: user.lastname,
+			email: user.email,
+			password: user.password,
+			joined: user.joined
 		})
 	}
 
