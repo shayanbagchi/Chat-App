@@ -78,7 +78,7 @@ class SignIn extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
-      if (data){
+      if (data.email === this.state.signInEmail){
         this.props.onRouteChange('home');
         this.props.checkUser(data.username);
       }
