@@ -1,21 +1,26 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
+import BreathingCircle from './BreathingCircle';
+import BreathingCircleInner from './BreathingCircleInner';
+
+// import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import LockIcon from '@material-ui/icons/LockOutlined';
+// import Input from '@material-ui/core/Input';
+// import InputLabel from '@material-ui/core/InputLabel';
+// import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import TextField from '@material-ui/core/TextField';
+import './Background.css';
 
 const styles = theme => ({
   layout: {
     width: 'auto',
-    display: 'block', // Fix IE11 issue.
+    display: 'block',
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
@@ -25,7 +30,7 @@ const styles = theme => ({
     },
   },
   paper: {
-    marginTop: theme.spacing.unit * 8,
+    marginTop: theme.spacing.unit * 3,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -34,6 +39,9 @@ const styles = theme => ({
   avatar: {
     margin: theme.spacing.unit,
     backgroundColor: theme.palette.secondary.main,
+  },
+  typo: {
+    marginTop: theme.spacing.unit * 3,
   },
   form: {
     width: '100%', // Fix IE11 issue.
@@ -92,6 +100,7 @@ class Register extends React.Component{
     .then(response => response.json())
     .then(user => {
       if(user) {
+        console.log(user);
         this.props.loadUser(user);
         this.props.onRouteChange('home');
       }
@@ -102,81 +111,86 @@ class Register extends React.Component{
   render() {
     const {classes} = this.props;
     return (
-    <React.Fragment>
-      <CssBaseline />
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockIcon />
-          </Avatar>
-          <Typography component="h2" variant="display1">
-            Sign Up
-          </Typography>
-          <form className={classes.form}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input
-              onChange={this.onEmailChange}
-              id="email"
-              name="email"
-              autoComplete="email"
-              autoFocus />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="username">UserName</InputLabel>
-              <Input
-                onChange={this.onUserNameChange}
-                name="Username"
-                type="Username"
-                id="Username"
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="firstname">First Name</InputLabel>
-              <Input
-                onChange={this.onFirstNameChange}
-                name="firstname"
-                type="firstname"
-                id="firstname"
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="lastname">Last Name</InputLabel>
-              <Input
-                onChange={this.onLastNameChange}
-                name="lastname"
-                type="lastname"
-                id="lastname"
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                onChange={this.onPasswordChange}
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </FormControl>
+      <div>
+        <BreathingCircle />
+        <BreathingCircleInner />
+          <React.Fragment>
+            <CssBaseline />
+            <main className={classes.layout}>
+              <Paper className={classes.paper}>
+                <Typography className={classes.typo} component="h2" variant="display1">
+                  Sign Up
+                </Typography>
+                <form className={classes.form}>
+                  <FormControl margin="normal" required fullWidth>
+                    <TextField
+                        onChange={this.onEmailChange}
+                        label="Email Address"
+                        placeholder="Email Address"
+                        className={classes.textField}
+                        type="email"
+                        variant="outlined"
+                        autoFocus
+                      />
+                  </FormControl>
+                  <FormControl margin="normal" required fullWidth>
+                    <TextField
+                        onChange={this.onUserNameChange}
+                        label="Username"
+                        placeholder="Username"
+                        className={classes.textField}
+                        variant="outlined"
+                      />
+                  </FormControl>
+                  <FormControl margin="normal" required fullWidth>
+                    <TextField
+                        onChange={this.onFirstNameChange}
+                        label="First Name"
+                        placeholder="First Name"
+                        className={classes.textField}
+                        variant="outlined"
+                      />
+                  </FormControl>
+                  <FormControl margin="normal" required fullWidth>
+                    <TextField
+                        onChange={this.onLastNameChange}
+                        label="Last Name"
+                        placeholder="Last Name"
+                        className={classes.textField}
+                        variant="outlined"
+                      />
+                  </FormControl>
+                  <FormControl margin="normal" required fullWidth>
+                    <TextField
+                        onChange={this.onPasswordChange}
+                        label="Password"
+                        placeholder="Password"
+                        className={classes.textField}
+                        type="password"
+                        variant="outlined"
+                      />
+                  </FormControl>
 
-            {/*<FormControlLabel
-                          control={<Checkbox value="remember" color="primary" />}
-                          label="Remember me"
-                        />*/}
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={this.onRegister}
-            >
-              Sign Up
-            </Button>
-          </form>
-        </Paper>
-      </main>
-    </React.Fragment>
+                  {
+                  /* <FormControlLabel
+                      control={<Checkbox value="remember" color="primary" />}
+                      label="Remember me"
+                    /> */
+                  }
+
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                    onClick={this.onRegister}>
+                      Sign Up
+                  </Button>
+                </form>
+              </Paper>
+            </main>
+          </React.Fragment>
+      </div>
   );
   }
 }

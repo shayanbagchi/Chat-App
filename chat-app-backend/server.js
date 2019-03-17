@@ -46,7 +46,7 @@ app.post('/signin', (req,res) => {
 			return db.select('*').from('users')
 				.where('email','=', req.body.email)
 				.then(user => {
-					res.json(user[0]);
+					res.status(200).json(user[0]);
 					chatkit.getUser({
 					  id: user[0].username,
 					})

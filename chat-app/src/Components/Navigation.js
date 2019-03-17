@@ -7,32 +7,43 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-const styles = {
+const drawerWidth = '25%';
+
+const styles = theme => ({
   root: {
-    flexGrow: 1,
-  },
-  background: {
-    background: "#f5f5f5"
+    height: '64px',
   },
   grow: {
     flexGrow: 1,
   },
+  appBar: {
+    background: "#f5f5f5",
+    height: '64px',
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
+  },
+  background:{
+    background: "#f5f5f5",
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+    color: '#000000de',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   },
-};
+});
 
-const Navigation = ({ onRouteChange ,isSignedIn, classes}) => {
+const Navigation = ({ onRouteChange ,isSignedIn, classes, handleDrawerToggle}) => {
     return (
-      <div className="navheight">
+      <div >
         { isSignedIn === false
             ? <div className={classes.root}>
                 <AppBar position="static" className={classes.background}>
                     <Toolbar>
-                        <IconButton className={classes.menuButton}>
-                            <MenuIcon />
-                        </IconButton>
                     <Typography className={classes.grow}>
                         Discord
                     </Typography>
@@ -42,10 +53,15 @@ const Navigation = ({ onRouteChange ,isSignedIn, classes}) => {
                 </AppBar>
             </div>
             : <div className={classes.root}>
-                <AppBar position="static" className={classes.background}>
+                <AppBar position="fixed" className={classes.appBar}>
                     <Toolbar>
-                        <IconButton className={classes.menuButton}>
-                            <MenuIcon />
+                        <IconButton
+                          color="inherit"
+                          aria-label="Open drawer"
+                          onClick={() => handleDrawerToggle()}
+                          className={classes.menuButton}
+                        >
+                          <MenuIcon />
                         </IconButton>
                     <Typography className={classes.grow}>
                         Discord
