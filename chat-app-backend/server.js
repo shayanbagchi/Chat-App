@@ -11,10 +11,10 @@ const saltRounds = 10;
 const db = knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'shayanb',
-    password : 'shayandude9',
-    database : 'chatapp'
+    host : 'chat-app.cvgmglwxgf4w.ap-south-1.rds.amazonaws.com',
+    user : 'ShayanB',
+    password : 'Shayandude9',
+    database : 'ChatAppDatabase'
   }
 });
 
