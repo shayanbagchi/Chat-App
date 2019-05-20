@@ -79,7 +79,7 @@ class SignIn extends React.Component {
   }
 
   onSubmitSignIn = () => {
-    fetch('http://localhost:3000/signin', {
+    fetch('https://chit-chat-backend.herokuapp.com/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -93,6 +93,8 @@ class SignIn extends React.Component {
       if (data.email === this.state.signInEmail){
         this.props.onRouteChange('home');
         this.props.checkUser(data.username);
+      }else {
+        alert ('Incorrect Username or Password');
       }
     })
   }
