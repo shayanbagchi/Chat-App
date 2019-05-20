@@ -79,7 +79,7 @@ class SignIn extends React.Component {
   }
 
   onSubmitSignIn = () => {
-    fetch('https://chit-chat-backend.herokuapp.com/signin', {
+    fetch('https://chatborg-backend.herokuapp.com/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

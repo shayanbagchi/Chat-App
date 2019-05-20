@@ -86,7 +86,7 @@ class Register extends React.Component{
   }
 
   onRegister = () => {
-    fetch('https://chit-chat-backend.herokuapp.com/register', {
+    fetch('https://chatborg-backend.herokuapp.com/register', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
